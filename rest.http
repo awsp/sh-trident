@@ -1,10 +1,30 @@
-POST http://localhost:8080/api/v1/feed
+POST http://localhost:8081/api/v1/feed
 Content-Type: application/json
 
 {
-  "url": "http://localhost:8080/api/v1/feed"
+  "url": "http://localhost:8081/api/v1/feed"
 }
 
 ###
 GET /api/v1/feed
 
+### Create focus without list
+
+POST http://localhost:8081/api/v1/focus
+Content-Type: application/json
+
+{
+  "name": "focus-1",
+  "counter": 1,
+  "total": 12
+}
+
+### Create focus with list
+
+POST http://localhost:8081/api/v1/focus
+Content-Type: application/json
+
+{
+  "name": "focus-with-list",
+  "phrases": ["aaa", "bbb"]
+}

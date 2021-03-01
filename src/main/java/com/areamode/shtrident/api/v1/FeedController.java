@@ -15,18 +15,18 @@ public class FeedController {
     private final FeedService feedService;
 
     @GetMapping({"", "/"})
-    public Iterable<Feed> index() {
+    public Iterable<Feed> listFeed() {
         return feedService.getFeeds();
     }
 
     @PostMapping({"", "/"})
-    public ResponseEntity<String> create(@RequestBody FeedRequest url) {
+    public ResponseEntity<String> createFeed(@RequestBody FeedRequest url) {
         boolean success = feedService.saveFeed(url);
         return ResponseEntity.ok("{\"success\": " + success + "}");
     }
 
     @GetMapping("/count")
-    public ResponseEntity<?> count() {
+    public ResponseEntity<?> getFeedCount() {
         return ResponseEntity.ok("{\"count\": " + feedService.getFeedCount() + "\"}");
     }
 }

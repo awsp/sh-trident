@@ -19,9 +19,10 @@ public class SchedulingService {
 
     @Scheduled(cron = "${cron.expression}")
     public void doJob() {
+        log.info("Starting cron job");
         for (String url : urls) {
             feedService.saveFeed(FeedRequest.builder().url(url).build());
         }
-        log.info("Completed");
+        log.info("Cron job completed");
     }
 }

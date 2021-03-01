@@ -28,6 +28,15 @@ public class FeedServiceImpl implements FeedService {
 
     private final FeedRepository feedRepository;
 
+    public Iterable<Feed> getFeeds() {
+        return feedRepository.findAll();
+    }
+
+    @Override
+    public Long getFeedCount() {
+        return feedRepository.count();
+    }
+
     public boolean saveFeed(FeedRequest feedRequest) {
         try {
             URL source = new URL(feedRequest.getUrl());

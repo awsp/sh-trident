@@ -1,0 +1,21 @@
+{
+  "name": "g-demolition",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "export": "next build && next export",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@blueprintjs/core": "^3.39.0",
+    "@blueprintjs/datetime": "^3.20.5",
+    "@blueprintjs/icons": "^3.24.0",
+    "@blueprintjs/select": "^3.15.5",
+    "next": "10.0.7",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "sass": "^1.32.8"
+  }
+}

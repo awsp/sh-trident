@@ -11,7 +11,7 @@ import {
   MenuItem,
   NumericInput,
   Popover,
-  Position
+  Position, Toaster
 } from "@blueprintjs/core";
 import React, {useState} from "react";
 import {KEYS} from "../constants";
@@ -91,9 +91,23 @@ export function Controls() {
     });
 
     response.json().then((data) => {
+      const toaster = Toaster.create({
+        position: Position.TOP,
+      });
+
       if (data.id) {
         setForm(formDefaults);
         closeDialog();
+        toaster.show({
+          message: `Focus ${data.name} is created`,
+          intent: "success"
+        });
+      } else {
+        toaster.show({
+          message: `Failed to create focus. See console for errors. `,
+          intent: "danger"
+        });
+        console.error(data);
       }
     });
   };

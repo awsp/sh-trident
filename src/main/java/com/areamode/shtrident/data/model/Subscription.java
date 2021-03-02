@@ -3,12 +3,10 @@ package com.areamode.shtrident.data.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Data
-public class Focus {
+public class Subscription {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,12 +14,7 @@ public class Focus {
 
     private String name;
 
-    @ElementCollection
-    private List<String> phrases = new ArrayList<>();
-
-    private int counter;
-
-    private int total;
+    private String url;
 
     @Lob
     private String remarks;

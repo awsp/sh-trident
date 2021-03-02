@@ -32,3 +32,7 @@ body,
 .bp3-input-group > .bp3-input-left-container, .bp3-input-group > .bp3-icon {
   z-index: 15;
 }
+
+main {
+  padding: 8px 16px;
+}

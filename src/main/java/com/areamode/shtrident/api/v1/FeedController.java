@@ -2,7 +2,7 @@ package com.areamode.shtrident.api.v1;
 
 import com.areamode.shtrident.data.model.Feed;
 import com.areamode.shtrident.data.model.FeedRequest;
-import com.areamode.shtrident.service.FeedService;
+import com.areamode.shtrident.service.FeedSubscriptionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,21 +12,21 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class FeedController {
 
-    private final FeedService feedService;
+    private final FeedSubscriptionService feedSubscriptionService;
 
     @GetMapping({"", "/"})
     public Iterable<Feed> listFeed() {
-        return feedService.getFeeds();
+        return feedSubscriptionService.getFeeds();
     }
 
     @PostMapping({"", "/"})
     public ResponseEntity<String> createFeed(@RequestBody FeedRequest url) {
-        boolean success = feedService.saveFeed(url);
+        boolean success = feedSubscriptionService.saveFeed(url);
         return ResponseEntity.ok("{\"success\": " + success + "}");
     }
 
     @GetMapping("/count")
     public ResponseEntity<?> getFeedCount() {
-        return ResponseEntity.ok("{\"count\": " + feedService.getFeedCount() + "\"}");
+        return ResponseEntity.ok("{\"count\": " + feedSubscriptionService.getFeedCount() + "\"}");
     }
 }

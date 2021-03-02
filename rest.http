@@ -9,7 +9,6 @@ Content-Type: application/json
 GET /api/v1/feed
 
 ### Create focus without list
-
 POST http://localhost:8081/api/v1/focus
 Content-Type: application/json
 
@@ -20,11 +19,25 @@ Content-Type: application/json
 }
 
 ### Create focus with list
-
 POST http://localhost:8081/api/v1/focus
 Content-Type: application/json
 
 {
   "name": "focus-with-list",
-  "phrases": ["aaa", "bbb"]
+  "phrases": [
+    "aaa",
+    "bbb"
+  ]
 }
+
+### Create subscription
+POST http://localhost:8081/api/v1/subscription
+Content-Type: application/json
+
+{
+  "name": "test subscription",
+  "url": "http://some.url/rssfeed.xml"
+}
+
+### Get subscriptions
+GET http://localhost:8081/api/v1/subscription

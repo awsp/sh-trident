@@ -2,7 +2,9 @@ package com.areamode.shtrident.service;
 
 import com.areamode.shtrident.data.model.Feed;
 import com.areamode.shtrident.data.model.FeedRequest;
+import com.areamode.shtrident.data.model.Subscription;
 import com.areamode.shtrident.data.repo.FeedRepository;
+import com.areamode.shtrident.data.repo.SubscriptionRepository;
 import com.areamode.shtrident.exception.FeedHashException;
 import com.sun.syndication.feed.synd.SyndEnclosure;
 import com.sun.syndication.feed.synd.SyndEntry;
@@ -24,9 +26,10 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class FeedServiceImpl implements FeedService {
+public class FeedSubscriptionServiceImpl implements FeedSubscriptionService {
 
     private final FeedRepository feedRepository;
+    private final SubscriptionRepository subscriptionRepository;
 
     public Iterable<Feed> getFeeds() {
         return feedRepository.findAll();
@@ -37,6 +40,17 @@ public class FeedServiceImpl implements FeedService {
         return feedRepository.count();
     }
 
+    @Override
+    public List<Subscription> getSubscriptions() {
+        return subscriptionRepository.findAll();
+    }
+
+    @Override
+    public Subscription saveSubscription(Subscription subscription) {
+        return subscriptionRepository.save(subscription);
+    }
+
+    @Override
     public boolean saveFeed(FeedRequest feedRequest) {
         try {
             URL source = new URL(feedRequest.getUrl());

@@ -2,6 +2,7 @@ package com.areamode.shtrident.service;
 
 import com.areamode.shtrident.data.model.Feed;
 import com.areamode.shtrident.data.model.FeedRequest;
+import com.areamode.shtrident.data.model.Focus;
 import com.areamode.shtrident.data.model.Subscription;
 import com.areamode.shtrident.data.repo.FeedRepository;
 import com.areamode.shtrident.data.repo.SubscriptionRepository;
@@ -31,7 +32,7 @@ public class FeedSubscriptionServiceImpl implements FeedSubscriptionService {
     private final FeedRepository feedRepository;
     private final SubscriptionRepository subscriptionRepository;
 
-    public Iterable<Feed> getFeeds() {
+    public Iterable<Feed> listFeeds() {
         return feedRepository.findAll();
     }
 

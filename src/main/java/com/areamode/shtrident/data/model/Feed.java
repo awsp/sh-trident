@@ -8,7 +8,7 @@ import javax.persistence.Id;
 
 @Document(indexName = "feed")
 @Data
-public class Feed {
+public class Feed implements Comparable<Feed> {
     @Id
     private String id;
 
@@ -17,4 +17,9 @@ public class Feed {
     private String enclosure;
     private String pubDate;
     private String checksum;
+
+    @Override
+    public int compareTo(Feed o) {
+        return this.title.compareTo(o.getTitle());
+    }
 }

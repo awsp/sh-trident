@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/feed")
 @RequiredArgsConstructor
@@ -14,9 +16,10 @@ public class FeedController {
 
     private final FeedSubscriptionService feedSubscriptionService;
 
+    // TODO: Temporary showing all feeds, remove / use Pagable instead
     @GetMapping({"", "/"})
     public Iterable<Feed> listFeed() {
-        return feedSubscriptionService.getFeeds();
+        return feedSubscriptionService.listFeeds();
     }
 
     @PostMapping({"", "/"})

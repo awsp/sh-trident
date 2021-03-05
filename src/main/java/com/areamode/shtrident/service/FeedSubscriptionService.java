@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface FeedSubscriptionService {
     boolean saveFeed(FeedRequest feedRequest);
-    Iterable<Feed> getFeeds();
+    Iterable<Feed> listFeeds();
     Long getFeedCount();
 
     List<Subscription> getSubscriptions();

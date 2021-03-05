@@ -41,3 +41,6 @@ Content-Type: application/json
 
 ### Get subscriptions
 GET http://localhost:8081/api/v1/subscription
+
+### Get focus feeds
+GET http://localhost:8081/api/v1/focus/1/feeds

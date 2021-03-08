@@ -14,13 +14,16 @@ import {
   Position, Toaster
 } from "@blueprintjs/core";
 import React, {useState} from "react";
+import {useRouter} from "next/router";
 import {KEYS} from "../constants";
 
 export function Controls() {
-  const formDefaults = {name: '', phrases: [], remarks: '', counter: 0, total: 0};
+  const formDefaults = {name: '', phrases: [], remarks: '', counter: 0, total: 0, subscription: {id: 0}};
   const [form, setForm] = useState(formDefaults);
   const [formDialog, setFormDialog] = useState(false);
   const [newPhrase, setNewPhrase] = useState('');
+  const router = useRouter();
+  const {subId} = router.query;
 
   const closeDialog = () => {
     setFormDialog(false);
@@ -82,34 +85,41 @@ export function Controls() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/focus`, {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(form)
-    });
+    if (subId) {
+      let formCopy = Object.assign({}, form);
+      formCopy.subscription.id = subId;
+      setForm(formCopy);
 
-    response.json().then((data) => {
-      const toaster = Toaster.create({
-        position: Position.TOP,
+      console.log(JSON.stringify(form));
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/focus`, {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(form)
       });
 
-      if (data.id) {
-        setForm(formDefaults);
-        closeDialog();
-        toaster.show({
-          message: `Focus ${data.name} is created`,
-          intent: "success"
+      response.json().then((data) => {
+        const toaster = Toaster.create({
+          position: Position.TOP,
         });
-      } else {
-        toaster.show({
-          message: `Failed to create focus. See console for errors. `,
-          intent: "danger"
-        });
-        console.error(data);
-      }
-    });
+
+        if (data.id) {
+          setForm(formDefaults);
+          closeDialog();
+          toaster.show({
+            message: `Focus ${data.name} is created`,
+            intent: "success"
+          });
+        } else {
+          toaster.show({
+            message: `Failed to create focus. See console for errors. `,
+            intent: "danger"
+          });
+          console.error(data);
+        }
+      });
+    }
   };
 
   const menu = <Menu>
@@ -129,6 +139,30 @@ export function Controls() {
                         autoComplete="off" fill value={form.name}/>
           </FormGroup>
 
+          <section className={styles.searchPhraseContainer}>
+            <p>Search Phrases</p>
+            <div className={styles.phraseList}>
+              {
+                form.phrases.length > 0 ? form.phrases.map((phrase, index) => (
+                  <ControlGroup key={`ph-${index}`} className={styles.phraseItem}>
+                    <InputGroup placeholder="Enter keywords" value={phrase} disabled={true}
+                                className={styles.inputPhrase}/>
+                    <Button onClick={removePhrase} icon="cross"/>
+                  </ControlGroup>
+                )) : <div className={styles.emptyList}>Please enter at least 1 phrase. </div>
+              }
+
+            </div>
+
+            <ControlGroup key="new-phrase">
+              <InputGroup leftElement={<Icon icon="tag"/>} placeholder="New Search Phrase" fill value={newPhrase}
+                          onChange={handlePhraseChange} onKeyUp={addSearchPhrase} name="newPhrase"
+                          key="new-search-phrase"
+                          autoComplete="off"/>
+              <Button icon="plus" onClick={addSearchPhrase} disabled={newPhrase === ''}/>
+            </ControlGroup>
+          </section>
+
           <section className={styles.metadata}>
             <FormGroup label="Counter" inline={true}>
               <NumericInput name="counter" value={form.counter} min="0" onValueChange={handleCounterChange}/>
@@ -142,27 +176,6 @@ export function Controls() {
           <FormGroup label="Remarks">
             <textarea value={form.remarks} className={styles.remarks} name="remarks" onChange={handleChange}/>
           </FormGroup>
-
-          <p>Search Phrases</p>
-          <div className={styles.phraseList}>
-            {
-              form.phrases.length > 0 ? form.phrases.map((phrase, index) => (
-                <ControlGroup key={`ph-${index}`} className={styles.phraseItem}>
-                  <InputGroup placeholder="Enter keywords" value={phrase} disabled={true}
-                              className={styles.inputPhrase}/>
-                  <Button onClick={removePhrase} icon="cross"/>
-                </ControlGroup>
-              )) : <div className={styles.emptyList}>Please enter at least 1 phrase. </div>
-            }
-
-          </div>
-
-          <ControlGroup key="something">
-            <InputGroup leftElement={<Icon icon="tag"/>} placeholder="New Search Phrase" fill value={newPhrase}
-                        onChange={handlePhraseChange} onKeyUp={addSearchPhrase} name="newPhrase" key="new-search-phrase"
-                        autoComplete="off"/>
-            <Button icon="plus" onClick={addSearchPhrase} disabled={newPhrase === ''}/>
-          </ControlGroup>
         </div>
         <div className={Classes.DIALOG_FOOTER}>
           <div className={styles.itemGroup}>

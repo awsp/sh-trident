@@ -49,7 +49,10 @@ export default function SubscriptionIndex() {
     getSubscriptions().then(data => {
       setSubscriptions(data);
     });
-  });
+    return () => {
+      setSubscriptions(null);
+    };
+  }, []);
 
   return <main>
     <h2>Subscription Page Demo</h2>
@@ -67,8 +70,8 @@ export default function SubscriptionIndex() {
     <h3>List</h3>
     <ul>
       {subscriptions ? subscriptions.map(subscription => (
-        <li>
-          <Link href={`/subscription/${subscription.id}/focus`}>
+        <li key={`sub-${subscription.id}`}>
+          <Link href={`/subscription/${subscription.id}`}>
             <a>{subscription.name}</a>
           </Link>
         </li>

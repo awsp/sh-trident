@@ -1,12 +1,10 @@
 import React from 'react';
 import styles from '../styles/Dashboard.module.scss'
-import {Controls} from "../components/controls";
 
 
 export default function Dashboard({content}) {
   return (
     <div id="dashboard" className={styles.content}>
-      <Controls />
       <div className={styles.feedList}>
       </div>
     </div>

@@ -1,5 +1,7 @@
 package com.areamode.shtrident.data.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,6 +30,10 @@ public class Focus {
     private int counter;
 
     private int total;
+
+    @JsonBackReference
+    @ManyToOne
+    private Subscription subscription;
 
     @Lob
     private String remarks;

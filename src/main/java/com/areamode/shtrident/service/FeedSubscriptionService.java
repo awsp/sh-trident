@@ -5,12 +5,14 @@ import com.areamode.shtrident.data.model.FeedRequest;
 import com.areamode.shtrident.data.model.Subscription;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface FeedSubscriptionService {
     boolean saveFeed(FeedRequest feedRequest);
     Iterable<Feed> listFeeds();
     Long getFeedCount();
 
+    Optional<Subscription> findSubscriptionById(Long subscriptionId);
     List<Subscription> getSubscriptions();
     Subscription saveSubscription(Subscription subscription);
 }

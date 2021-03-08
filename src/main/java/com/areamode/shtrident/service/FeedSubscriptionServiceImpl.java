@@ -2,7 +2,6 @@ package com.areamode.shtrident.service;
 
 import com.areamode.shtrident.data.model.Feed;
 import com.areamode.shtrident.data.model.FeedRequest;
-import com.areamode.shtrident.data.model.Focus;
 import com.areamode.shtrident.data.model.Subscription;
 import com.areamode.shtrident.data.repo.FeedRepository;
 import com.areamode.shtrident.data.repo.SubscriptionRepository;
@@ -23,6 +22,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -39,6 +39,11 @@ public class FeedSubscriptionServiceImpl implements FeedSubscriptionService {
     @Override
     public Long getFeedCount() {
         return feedRepository.count();
+    }
+
+    @Override
+    public Optional<Subscription> findSubscriptionById(Long subscriptionId) {
+        return subscriptionRepository.findById(subscriptionId);
     }
 
     @Override

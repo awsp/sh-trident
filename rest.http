@@ -1,12 +1,14 @@
-POST http://localhost:8081/api/v1/feed
+### Get Feed
+GET http://localhost:8081/api/v1/feed
+
+### Create subscription
+POST http://localhost:8081/api/v1/subscription
 Content-Type: application/json
 
 {
-  "url": "http://localhost:8081/api/v1/feed"
+  "name": "test subscription",
+  "url": "http://some.url/rssfeed.xml"
 }
-
-###
-GET /api/v1/feed
 
 ### Create focus without list
 POST http://localhost:8081/api/v1/focus
@@ -15,7 +17,10 @@ Content-Type: application/json
 {
   "name": "focus-1",
   "counter": 1,
-  "total": 12
+  "total": 12,
+  "subscription": {
+    "id": 1
+  }
 }
 
 ### Create focus with list
@@ -27,20 +32,17 @@ Content-Type: application/json
   "phrases": [
     "aaa",
     "bbb"
-  ]
+  ],
+  "subscription": {
+    "id": 1
+  }
 }
 
-### Create subscription
-POST http://localhost:8081/api/v1/subscription
-Content-Type: application/json
-
-{
-  "name": "test subscription",
-  "url": "http://some.url/rssfeed.xml"
-}
-
-### Get subscriptions
+### Get all subscriptions
 GET http://localhost:8081/api/v1/subscription
+
+### Get subscription No.1
+GET http://localhost:8081/api/v1/subscription/1
 
 ### Get focus feeds
 GET http://localhost:8081/api/v1/focus/1/feeds

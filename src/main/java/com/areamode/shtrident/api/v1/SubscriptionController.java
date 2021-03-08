@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/subscription")
@@ -23,6 +24,12 @@ public class SubscriptionController {
     @PostMapping({"", "/"})
     public Subscription save(@RequestBody Subscription subscription) {
         return feedSubscriptionService.saveSubscription(subscription);
+    }
+
+    @GetMapping("{id}")
+    public Subscription getSubscription(@PathVariable Long id) {
+        Optional<Subscription> subscriptionById = feedSubscriptionService.findSubscriptionById(id);
+        return subscriptionById.orElse(null);
     }
 
 }

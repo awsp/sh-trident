@@ -22,6 +22,7 @@ export function Controls() {
   const [form, setForm] = useState(formDefaults);
   const [formDialog, setFormDialog] = useState(false);
   const [newPhrase, setNewPhrase] = useState('');
+  const [isIMEMode, setIsIMEMode] = useState(false);
   const router = useRouter();
   const {subId} = router.query;
 
@@ -61,7 +62,7 @@ export function Controls() {
 
   const addSearchPhrase = (e) => {
     e.preventDefault();
-    if (newPhrase !== '' && (e.which === KEYS.ENTER || e.button === 0)) {
+    if (newPhrase !== '' && ((e.which === KEYS.ENTER && !isIMEMode) || e.button === 0)) {
       const phrases = form.phrases;
       if (phrases.indexOf(newPhrase) < 0) {
         phrases.push(newPhrase);
@@ -122,6 +123,17 @@ export function Controls() {
     }
   };
 
+  const compositionStart = (e) => {
+    setIsIMEMode(true);
+  };
+
+  const compositionEnd = (e) => {
+    // Allow 1 second for IME before re-enabling Enter to submit.
+    setTimeout(() => {
+      setIsIMEMode(false);
+    }, 1000);
+  };
+
   const menu = <Menu>
     <MenuItem text="New Focus" onClick={openDialog}/>
   </Menu>;
@@ -157,6 +169,7 @@ export function Controls() {
             <ControlGroup key="new-phrase">
               <InputGroup leftElement={<Icon icon="tag"/>} placeholder="New Search Phrase" fill value={newPhrase}
                           onChange={handlePhraseChange} onKeyUp={addSearchPhrase} name="newPhrase"
+                          onCompositionStart={compositionStart} onCompositionEnd={compositionEnd}
                           key="new-search-phrase"
                           autoComplete="off"/>
               <Button icon="plus" onClick={addSearchPhrase} disabled={newPhrase === ''}/>

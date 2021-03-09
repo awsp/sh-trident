@@ -1,6 +1,18 @@
 import {useEffect, useState} from "react";
 import Link from "next/link";
-import {Button, FormGroup, Icon, InputGroup} from "@blueprintjs/core";
+import {
+  Alignment,
+  Button,
+  ButtonGroup,
+  Card,
+  ControlGroup,
+  Elevation,
+  FormGroup,
+  Icon,
+  InputGroup
+} from "@blueprintjs/core";
+import Loader from "../../components/Loader";
+import styles from "../../styles/Subscription.module.scss";
 
 export default function SubscriptionIndex() {
   const defaultFormData = {name: '', url: ''};
@@ -59,23 +71,34 @@ export default function SubscriptionIndex() {
 
     <form onSubmit={handleFormSubmit}>
       <FormGroup label="Name">
-        <InputGroup name="name" onChange={handleChange} value={form.name} leftElement={<Icon icon="bookmark" />}/>
+        <InputGroup name="name" onChange={handleChange} value={form.name} leftElement={<Icon icon="bookmark"/>}/>
       </FormGroup>
       <FormGroup label="URL">
-        <InputGroup name="url" onChange={handleChange} value={form.url} leftElement={<Icon icon="globe-network" />}/>
+        <InputGroup name="url" onChange={handleChange} value={form.url} leftElement={<Icon icon="globe-network"/>}/>
       </FormGroup>
       <Button type="submit" intent="primary" disabled={formValidate(form.name, form.url)}>New Subscription</Button>
     </form>
 
     <h3>List</h3>
-    <ul>
-      {subscriptions ? subscriptions.map(subscription => (
-        <li key={`sub-${subscription.id}`}>
-          <Link href={`/subscription/${subscription.id}`}>
-            <a>{subscription.name}</a>
-          </Link>
-        </li>
-      )) : ''}
-    </ul>
+    {subscriptions ?
+      subscriptions.length > 0 ?
+        <div className={styles.subscriptionsContainer}>
+          {subscriptions.map(subscription => (
+            <Card key={`sub-${subscription.id}`} className={styles.subscription} elevation={Elevation.ONE}>
+              <Link href={`/subscription/${subscription.id}`}>
+                <a>{subscription.name}</a>
+              </Link>
+              <div className={styles.subscriptionControls}>
+                <section>
+                  <ButtonGroup alignText={Alignment.CENTER} large={true} fill={true} minimal={true}>
+                    <Button icon="edit"/>
+                    <Button icon="list"/>
+                    <Button icon="trash"/>
+                  </ButtonGroup>
+                </section>
+              </div>
+            </Card>
+          ))}</div> : <div>No subscriptions</div> :
+      <Loader text="Loading..."/>}
   </main>
 }

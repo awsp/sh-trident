@@ -1,7 +1,7 @@
 import {formatDate} from "../../helpers/feed-helper";
 
 const FeedList = ({feeds}) => {
-  return <table>
+  return <table className="flt">
     <thead>
       <tr>
         <th>Publish Date</th>

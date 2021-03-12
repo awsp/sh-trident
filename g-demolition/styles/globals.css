@@ -37,38 +37,49 @@ main {
     padding: 8px 16px;
 }
 
-table {
+table.flt {
     border-collapse: collapse;
     box-shadow: 0 0 1px #222;
+    border-radius: 2px;
 }
 
-thead th {
-    color: #363735;
-    text-shadow: 1px 1px #cbcbcb;
+table.flt thead th {
+    color: #555;
+    text-shadow: 0 1px #dfdfdf;
     background-image: linear-gradient(to bottom, #fff 2%, #eee 98%);
     padding: 4px 10px 5px;
     box-shadow: 0 1px 1px #aaa;
     font-size: 13px;
     border-right: 1px solid #eee;
     border-bottom: 1px solid #a2a2a2;
+    cursor: default;
 }
 
-td {
+table.flt thead th:first-child {
+    border-top-left-radius: 2px;
+}
+
+thead th:last-child {
+    border-top-right-radius: 2px;
+}
+
+table.flt td {
     border-right: 1px solid #eee;
-    padding: 8px 10px;
+    border-bottom: 1px solid #eee;
+    padding: 6px 10px;
     font-size: 13px;
 }
 
-td:last-child {
+table.flt td:last-child {
     border-right: 0;
 }
 
-tr:nth-child(2n+1) td {
+table.flt tr:nth-child(2n+1) td {
     background: #fdfdfd;
 }
 
-tr:nth-child(2n) td {
-    background: #ecf2fa;
+table.flt tr:nth-child(2n) td {
+    background: rgb(244, 250, 255);
 }
 
 .no-wrap {

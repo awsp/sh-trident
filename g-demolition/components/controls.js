@@ -1,17 +1,16 @@
 import styles from "../styles/Controls.module.scss";
 import {
   Button,
+  ButtonGroup,
   Classes,
   ControlGroup,
   Dialog,
   FormGroup,
   Icon,
   InputGroup,
-  Menu,
-  MenuItem,
   NumericInput,
-  Popover,
-  Position, Toaster
+  Position,
+  Toaster
 } from "@blueprintjs/core";
 import React, {useState} from "react";
 import {useRouter} from "next/router";
@@ -91,7 +90,6 @@ export function Controls() {
       formCopy.subscription.id = subId;
       setForm(formCopy);
 
-      console.log(JSON.stringify(form));
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/focus`, {
         method: 'post',
         headers: {
@@ -134,14 +132,13 @@ export function Controls() {
     }, 1000);
   };
 
-  const menu = <Menu>
-    <MenuItem text="New Focus" onClick={openDialog}/>
-  </Menu>;
-
-  return (<section className={styles.controls}>
-    <Popover content={menu} position={Position.BOTTOM}>
-      <Button icon="plus" text=" Actions " className="bp3-small"/>
-    </Popover>
+  return (<div>
+    <ButtonGroup fill={true} large={true} minimal={true} className={styles.focusControls}>
+      <Button icon="plus" intent="primary" onClick={openDialog}/>
+      <Button icon="minus" intent="primary"/>
+      <Button icon="history" intent="primary"/>
+      <Button icon="settings" intent="primary"/>
+    </ButtonGroup>
 
     <Dialog isOpen={formDialog} title="New Focus" className={styles.dialog}>
       <form>
@@ -199,5 +196,5 @@ export function Controls() {
         </div>
       </form>
     </Dialog>
-  </section>);
+  </div>);
 }

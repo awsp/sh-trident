@@ -1,18 +1,13 @@
 import {useEffect, useState} from "react";
-import {Icon} from "@blueprintjs/core";
+import Feed from "./Feed";
+
+import styles from "../../styles/Focus.module.scss";
+import Skeleton from "../Skeleton";
+import {Card} from "@blueprintjs/core";
+import {getFeeds} from "../../helpers/feed-helper";
 
 const Focus = ({focus}) => {
   const [feeds, setFeeds] = useState(null);
-
-  const getFeeds = async (focusId) => {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/focus/${focusId}/feeds`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
-    return response.json();
-  };
 
   useEffect(() => {
     getFeeds(focus.id).then(data => {
@@ -23,18 +18,16 @@ const Focus = ({focus}) => {
     }
   }, [focus]);
 
-  return <section>
+  return <Card className={styles.focus}>
     Focus: {focus.name}
-    <ul>
+    <section>
       {feeds ?
         feeds.length > 0 ?
-          feeds.map(feed => <li key={`feed-${feed.id}`}>
-            {feed.title} <a target="_blank" href={feed.enclosure}><Icon icon="link" /></a>
-          </li>) :
+          feeds.map(feed => <Feed key={`feed-${feed.id}`} feed={feed}/>) :
           <div>No feeds</div> :
-        <div>Fetching feeds...</div>}
-    </ul>
-  </section>;
+        <Skeleton/>}
+    </section>
+  </Card>;
 };
 
 export default Focus;

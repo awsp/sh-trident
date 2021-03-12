@@ -8,4 +8,9 @@ export async function getFeeds(focusId) {
   return response.json();
 }
 
+export function formatDate(pubDate) {
+  const date = new Date(pubDate);
+  return date.toLocaleString();
+}
+
 export const DEFAULT_NODE = [0, 0];

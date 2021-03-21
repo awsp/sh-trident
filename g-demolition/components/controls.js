@@ -16,7 +16,7 @@ import React, {useState} from "react";
 import {useRouter} from "next/router";
 import {KEYS} from "../constants";
 
-export function Controls() {
+export function Controls({callback}) {
   const formDefaults = {name: '', phrases: [], remarks: '', counter: 0, total: 0, subscription: {id: 0}};
   const [form, setForm] = useState(formDefaults);
   const [formDialog, setFormDialog] = useState(false);
@@ -105,6 +105,7 @@ export function Controls() {
 
         if (data.id) {
           setForm(formDefaults);
+          callback(true);
           closeDialog();
           toaster.show({
             message: `Focus ${data.name} is created`,
@@ -129,7 +130,7 @@ export function Controls() {
     // Allow 1 second for IME before re-enabling Enter to submit.
     setTimeout(() => {
       setIsIMEMode(false);
-    }, 1000);
+    }, 500);
   };
 
   return (<div>

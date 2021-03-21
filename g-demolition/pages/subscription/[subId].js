@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
 
 import styles from "../../styles/Subscription.module.scss";
-import {Button, ButtonGroup, Card, Elevation, Tree} from "@blueprintjs/core";
+import {Card, Elevation, Tree} from "@blueprintjs/core";
 import {generateTreeData, updateTree, updateTreeNode} from "../../helpers/tree-helper";
 import FeedList from "../../components/subscription/FeedList";
 import {getFeeds} from "../../helpers/feed-helper";
@@ -16,6 +16,7 @@ const Subscription = () => {
   const [treeData, setTreeData] = useState(null);
   const [feedData, setFeedData] = useState(null);
   const [feedHeading, setFeedHeading] = useState('');
+  const [loadSubscription, setLoadSubscription] = useState(false);
 
   const getSubscription = async () => {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/subscription/${subId}`, {
@@ -32,8 +33,11 @@ const Subscription = () => {
     getSubscription().then(subscriptionData => {
       setSubscription(subscriptionData);
       setTreeData(generateTreeData(subscriptionData.focuses));
+      if (loadSubscription) {
+        setLoadSubscription(false);
+      }
     });
-  }, [router.isReady]);
+  }, [router.isReady, loadSubscription]);
 
   const handleNodeClick = (node, path) => {
     if (node && node.id) {
@@ -63,7 +67,7 @@ const Subscription = () => {
                              onNodeExpand={handleNodeExpand}
                              onNodeCollapse={handleNodeCollapse}/>}
         </section>
-        <Controls />
+        <Controls callback={setLoadSubscription}/>
       </aside>
       <main>
         <h1>{feedHeading}</h1>

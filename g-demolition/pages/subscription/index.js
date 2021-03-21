@@ -1,16 +1,6 @@
 import {useEffect, useState} from "react";
 import Link from "next/link";
-import {
-  Alignment,
-  Button,
-  ButtonGroup,
-  Card,
-  ControlGroup,
-  Elevation,
-  FormGroup,
-  Icon,
-  InputGroup
-} from "@blueprintjs/core";
+import {Alignment, Button, ButtonGroup, Card, Elevation, FormGroup, Icon, InputGroup} from "@blueprintjs/core";
 import Loader from "../../components/Loader";
 import styles from "../../styles/Subscription.module.scss";
 
@@ -52,7 +42,6 @@ export default function SubscriptionIndex() {
     });
 
     response.json().then((subscription) => {
-      console.log(subscription);
       setForm(defaultFormData);
     });
   };
@@ -69,17 +58,6 @@ export default function SubscriptionIndex() {
   return <main>
     <h2>Subscription Page Demo</h2>
 
-    <form onSubmit={handleFormSubmit}>
-      <FormGroup label="Name">
-        <InputGroup name="name" onChange={handleChange} value={form.name} leftElement={<Icon icon="bookmark"/>}/>
-      </FormGroup>
-      <FormGroup label="URL">
-        <InputGroup name="url" onChange={handleChange} value={form.url} leftElement={<Icon icon="globe-network"/>}/>
-      </FormGroup>
-      <Button type="submit" intent="primary" disabled={formValidate(form.name, form.url)}>New Subscription</Button>
-    </form>
-
-    <h3>List</h3>
     {subscriptions ?
       subscriptions.length > 0 ?
         <div className={styles.subscriptionsContainer}>
@@ -100,5 +78,18 @@ export default function SubscriptionIndex() {
             </Card>
           ))}</div> : <div>No subscriptions</div> :
       <Loader text="Loading..."/>}
+
+    <h2>Form</h2>
+
+    <form onSubmit={handleFormSubmit}>
+      <FormGroup label="Name">
+        <InputGroup name="name" onChange={handleChange} value={form.name} leftElement={<Icon icon="bookmark"/>}/>
+      </FormGroup>
+      <FormGroup label="URL">
+        <InputGroup name="url" onChange={handleChange} value={form.url} leftElement={<Icon icon="globe-network"/>}/>
+      </FormGroup>
+      <Button type="submit" intent="primary" disabled={formValidate(form.name, form.url)}>New Subscription</Button>
+    </form>
+
   </main>
 }

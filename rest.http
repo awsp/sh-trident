@@ -46,3 +46,6 @@ GET http://localhost:8081/api/v1/subscription/1
 
 ### Get focus feeds
 GET http://localhost:8081/api/v1/focus/1/feeds
+
+### Manual kick off scheduler
+POST http://localhost:8081/api/v1/system/execute-scheduler

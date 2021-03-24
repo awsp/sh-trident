@@ -9,5 +9,6 @@ import java.util.Set;
 public interface FocusService {
     Focus save(Focus focus);
     Optional<Focus> findFocus(Long focusId);
+    void deleteFocus(Long focusId);
     Set<Feed> getFeeds(Focus focus);
 }

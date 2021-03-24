@@ -12,26 +12,36 @@ import {
   Position,
   Toaster
 } from "@blueprintjs/core";
-import React, {useState} from "react";
+import React, {useReducer, useState} from "react";
 import {useRouter} from "next/router";
 import {KEYS} from "../constants";
+import {createFeedFocus, deleteFocus} from "../helpers/feed-helper";
 
-export function Controls({callback}) {
+const Controls = ({children}) => {
+  return <>
+    <ButtonGroup fill={true} large={true} minimal={true} className={styles.focusControls}>
+      {children}
+    </ButtonGroup>
+  </>;
+};
+
+Controls.AddFocus = ({callback}) => {
+  const dialogReducer = (state, action) => {
+    switch (action.type) {
+      case 'open':
+        return true;
+      case 'close':
+        return false;
+    }
+  };
+
   const formDefaults = {name: '', phrases: [], remarks: '', counter: 0, total: 0, subscription: {id: 0}};
   const [form, setForm] = useState(formDefaults);
-  const [formDialog, setFormDialog] = useState(false);
+  const [formDialog, dispatchFormDialog] = useReducer(dialogReducer, false);
   const [newPhrase, setNewPhrase] = useState('');
   const [isIMEMode, setIsIMEMode] = useState(false);
   const router = useRouter();
   const {subId} = router.query;
-
-  const closeDialog = () => {
-    setFormDialog(false);
-  };
-
-  const openDialog = () => {
-    setFormDialog(true);
-  };
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -90,15 +100,7 @@ export function Controls({callback}) {
       formCopy.subscription.id = subId;
       setForm(formCopy);
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/focus`, {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(form)
-      });
-
-      response.json().then((data) => {
+      createFeedFocus(form).then((data) => {
         const toaster = Toaster.create({
           position: Position.TOP,
         });
@@ -106,7 +108,7 @@ export function Controls({callback}) {
         if (data.id) {
           setForm(formDefaults);
           callback(true);
-          closeDialog();
+          dispatchFormDialog({type: 'close'})
           toaster.show({
             message: `Focus ${data.name} is created`,
             intent: "success"
@@ -133,15 +135,10 @@ export function Controls({callback}) {
     }, 500);
   };
 
-  return (<div>
-    <ButtonGroup fill={true} large={true} minimal={true} className={styles.focusControls}>
-      <Button icon="plus" intent="primary" onClick={openDialog}/>
-      <Button icon="minus" intent="primary"/>
-      <Button icon="history" intent="primary"/>
-      <Button icon="settings" intent="primary"/>
-    </ButtonGroup>
-
-    <Dialog isOpen={formDialog} title="New Focus" className={styles.dialog}>
+  return (<>
+    <Button icon="plus" intent="primary" onClick={() => dispatchFormDialog({type: 'open'})}/>
+    <Dialog isOpen={formDialog} title="New Focus" className={styles.dialog}
+            onClose={() => dispatchFormDialog({type: 'close'})}>
       <form>
         <div className={styles.dialogForm}>
           <FormGroup label="Name">
@@ -192,10 +189,64 @@ export function Controls({callback}) {
           <div className={styles.itemGroup}>
             <Button intent="primary" disabled={form.name === '' || form.phrases.length === 0}
                     onClick={handleSubmit}>Save Focus</Button>
-            <Button onClick={closeDialog}>Cancel</Button>
+            <Button onClick={() => dispatchFormDialog({type: 'close'})}>Cancel</Button>
           </div>
         </div>
       </form>
     </Dialog>
-  </div>);
+  </>);
 }
+
+Controls.RemoveFocus = ({focusId, callback}) => {
+  const confirmDialogReducer = (state, action) => {
+    switch (action.type) {
+      case 'open':
+        return true;
+      case 'close':
+        return false;
+    }
+  };
+  const [confirmDialog, dispatchConfirmDialog] = useReducer(confirmDialogReducer, false);
+
+  const confirmation = () => {
+    dispatchConfirmDialog({type: 'open'});
+  };
+
+  const confirmDelete = () => {
+    if (focusId) {
+      deleteFocus(focusId).then(() => {
+        callback(true);
+        dispatchConfirmDialog({type: 'close'});
+      });
+    }
+  };
+
+  return <>
+    <Button icon="minus" intent="primary" onClick={confirmation} disabled={!focusId}/>
+    <Dialog isOpen={confirmDialog}>
+      <div className={styles.dialogForm}>
+        <p>Confirm Delete? {focusId} aaa </p>
+      </div>
+      <div className={Classes.DIALOG_FOOTER}>
+        <div className={styles.itemGroup}>
+          <Button intent="primary" onClick={confirmDelete}> Delete </Button>
+          <Button onClick={() => dispatchConfirmDialog({type: 'close'})}> Cancel </Button>
+        </div>
+      </div>
+    </Dialog>
+  </>;
+};
+
+Controls.History = () => {
+  return (
+    <Button icon="history" intent="primary"/>
+  );
+};
+
+Controls.Settings = () => {
+  return (
+    <Button icon="settings" intent="primary"/>
+  );
+};
+
+export default Controls;

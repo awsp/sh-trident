@@ -24,6 +24,7 @@ public class SchedulingService {
         List<Subscription> subscriptions = feedSubscriptionService.getSubscriptions();
 
         for (Subscription subscription : subscriptions) {
+            log.info("Parsing: " + subscription.getUrl());
             feedSubscriptionService.saveFeed(FeedRequest.builder().url(subscription.getUrl()).build());
         }
         log.info("Cron job completed");

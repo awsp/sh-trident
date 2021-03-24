@@ -35,4 +35,9 @@ public class FocusServiceImpl implements FocusService {
         return focusRepository.findById(focusId);
     }
 
+    @Override
+    public void deleteFocus(Long focusId) {
+        focusRepository.deleteById(focusId);
+    }
+
 }

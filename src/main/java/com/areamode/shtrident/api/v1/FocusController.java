@@ -32,4 +32,10 @@ public class FocusController {
         }
         return Collections.emptySet();
     }
+
+    @DeleteMapping("/{focusId}")
+    public ResponseEntity<?> deleteFocus(@PathVariable(name = "focusId") Long focusId) {
+        focusService.deleteFocus(focusId);
+        return ResponseEntity.accepted().body("{}");
+    }
 }

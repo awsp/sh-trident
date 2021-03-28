@@ -5,12 +5,15 @@ const Navi = () => (
   <Navbar>
     <Navbar.Group align={Alignment.CENTER}>
       <Navbar.Heading>SH Trident</Navbar.Heading>
-      <Navbar.Divider />
+      <Navbar.Divider/>
       <Link href="/">
         <a className="bp3-button bp3-minimal">Dashboard</a>
       </Link>
       <Link href="/subscription">
         <a className="bp3-button bp3-minimal">Subscription</a>
+      </Link>
+      <Link href="/work">
+        <a className="bp3-button bp3-minimal">Work</a>
       </Link>
       <Link href="/about">
         <a className="bp3-button bp3-minimal">About</a>

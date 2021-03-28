@@ -4,7 +4,7 @@ import {Alignment, Button, ButtonGroup, Card, Elevation, FormGroup, Icon, InputG
 import Loader from "../../components/Loader";
 import styles from "../../styles/Subscription.module.scss";
 
-export default function SubscriptionIndex() {
+export default function SubscriptionPage() {
   const defaultFormData = {name: '', url: ''};
   const [subscriptions, setSubscriptions] = useState(null);
   const [form, setForm] = useState(defaultFormData);

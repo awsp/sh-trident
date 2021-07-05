@@ -2,7 +2,6 @@ package com.areamode.shtrident.service;
 
 import com.areamode.shtrident.data.model.FeedRequest;
 import com.areamode.shtrident.data.model.Subscription;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;

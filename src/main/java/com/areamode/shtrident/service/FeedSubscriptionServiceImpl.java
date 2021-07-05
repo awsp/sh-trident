@@ -29,6 +29,8 @@ import java.util.Optional;
 @Slf4j
 public class FeedSubscriptionServiceImpl implements FeedSubscriptionService {
 
+    private final static String SEPARATOR = "|";
+
     private final FeedRepository feedRepository;
     private final SubscriptionRepository subscriptionRepository;
 
@@ -105,6 +107,6 @@ public class FeedSubscriptionServiceImpl implements FeedSubscriptionService {
         if (feed.getEnclosure().isEmpty() || feed.getPubDate().isEmpty() || feed.getLink().isEmpty()) {
             throw new FeedHashException("Unable to generate hash");
         }
-        return DigestUtils.md5Hex(feed.getPubDate() + "|" + feed.getLink() + "|" + feed.getEnclosure());
+        return DigestUtils.md5Hex(feed.getPubDate() + SEPARATOR + feed.getLink() + SEPARATOR + feed.getEnclosure());
     }
 }

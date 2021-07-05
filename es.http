@@ -1,0 +1,15 @@
+### List all indices
+GET http://localhost:9200/_cat/indices
+
+###
+GET http://localhost:9200/program/_search
+Content-Type: application/json
+
+{
+    "query": {
+        "match_all": {}
+    }
+}
+
+### DELETE index
+DELETE http://localhost:9200/program

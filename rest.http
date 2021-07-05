@@ -49,3 +49,21 @@ GET http://localhost:8081/api/v1/focus/1/feeds
 
 ### Manual kick off scheduler
 POST http://localhost:8081/api/v1/system/execute-scheduler
+
+### Work
+POST http://localhost:8081/api/v1/work
+Content-Type: application/json
+
+{
+  "name": "ABC",
+  "workMetaList": [
+    {
+      "key": "aaa",
+      "value": "bbb"
+    },
+    {
+      "key": "ccc",
+      "value": "ddd"
+    }
+  ]
+}

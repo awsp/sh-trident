@@ -1,11 +1,11 @@
 package com.areamode.shtrident.service;
 
 import com.areamode.shtrident.data.model.Feed;
-import com.areamode.shtrident.data.model.FeedRequest;
 import com.areamode.shtrident.data.model.Subscription;
 import com.areamode.shtrident.data.repo.FeedRepository;
 import com.areamode.shtrident.data.repo.SubscriptionRepository;
 import com.areamode.shtrident.exception.FeedHashException;
+import com.areamode.shtrident.payload.request.FeedRequest;
 import com.sun.syndication.feed.synd.SyndEnclosure;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
@@ -28,6 +28,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Slf4j
 public class FeedSubscriptionServiceImpl implements FeedSubscriptionService {
+
+    private final static String SEPARATOR = "|";
 
     private final FeedRepository feedRepository;
     private final SubscriptionRepository subscriptionRepository;
@@ -105,6 +107,6 @@ public class FeedSubscriptionServiceImpl implements FeedSubscriptionService {
         if (feed.getEnclosure().isEmpty() || feed.getPubDate().isEmpty() || feed.getLink().isEmpty()) {
             throw new FeedHashException("Unable to generate hash");
         }
-        return DigestUtils.md5Hex(feed.getPubDate() + "|" + feed.getLink() + "|" + feed.getEnclosure());
+        return DigestUtils.md5Hex(feed.getPubDate() + SEPARATOR + feed.getLink() + SEPARATOR + feed.getEnclosure());
     }
 }

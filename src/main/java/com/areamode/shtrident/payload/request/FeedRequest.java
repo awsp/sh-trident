@@ -1,4 +1,4 @@
-package com.areamode.shtrident.data.model;
+package com.areamode.shtrident.payload.request;
 
 import lombok.Builder;
 import lombok.Data;

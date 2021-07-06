@@ -1,8 +1,8 @@
 ### Get Feed
-GET http://localhost:8081/api/v1/feed
+GET {{apiBase}}/feed
 
 ### Create subscription
-POST http://localhost:8081/api/v1/subscription
+POST {{apiBase}}/subscription
 Content-Type: application/json
 
 {
@@ -11,7 +11,7 @@ Content-Type: application/json
 }
 
 ### Create focus without list
-POST http://localhost:8081/api/v1/focus
+POST {{apiBase}}/focus
 Content-Type: application/json
 
 {
@@ -24,7 +24,7 @@ Content-Type: application/json
 }
 
 ### Create focus with list
-POST http://localhost:8081/api/v1/focus
+POST {{apiBase}}/focus
 Content-Type: application/json
 
 {
@@ -39,13 +39,40 @@ Content-Type: application/json
 }
 
 ### Get all subscriptions
-GET http://localhost:8081/api/v1/subscription
+GET {{apiBase}}/subscription
 
 ### Get subscription No.1
-GET http://localhost:8081/api/v1/subscription/1
+GET {{apiBase}}/subscription/1
 
 ### Get focus feeds
-GET http://localhost:8081/api/v1/focus/1/feeds
+GET {{apiBase}}/focus/1/feeds
 
 ### Manual kick off scheduler
-POST http://localhost:8081/api/v1/system/execute-scheduler
+POST {{apiBase}}/system/execute-scheduler
+
+### Manual kick off indexing service
+POST {{apiBase}}/system/index-program
+
+### Manual kick off indexing service
+POST {{apiBase}}/system/index-anison
+
+### Cancel
+GET {{apiBase}}/system/cancel/86bec58f-bfae-489e-adff-a2dfe3f18776
+
+### Work
+POST {{apiBase}}/work
+Content-Type: application/json
+
+{
+  "name": "ABC",
+  "workMetaList": [
+    {
+      "key": "aaa",
+      "value": "bbb"
+    },
+    {
+      "key": "ccc",
+      "value": "ddd"
+    }
+  ]
+}

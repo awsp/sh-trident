@@ -37,3 +37,9 @@ test_data.xml
 node_modules/
 .next
 storage/
+importing/
+
+db.sqlite
+data/
+!data/.gitkeep
+.DS_Store

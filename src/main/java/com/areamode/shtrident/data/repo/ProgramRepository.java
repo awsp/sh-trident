@@ -1,10 +1,8 @@
 package com.areamode.shtrident.data.repo;
 
 import com.areamode.shtrident.data.model.Program;
-import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Optional;
-
-public interface ProgramRepository extends ElasticsearchRepository<Program, String> {
-    Optional<Program> findFirstByChecksum(String checksum);
+public interface ProgramRepository extends JpaRepository<Program, String> {
+    Boolean existsByChecksum(String checksum);
 }

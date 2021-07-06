@@ -1,16 +1,19 @@
 package com.areamode.shtrident.data.model;
 
 import lombok.Data;
-import org.apache.commons.codec.digest.DigestUtils;
-import org.springframework.data.elasticsearch.annotations.Document;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Document(indexName = "feed")
+@Entity
 @Data
 public class Feed implements Comparable<Feed> {
+
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     private String title;
     private String link;

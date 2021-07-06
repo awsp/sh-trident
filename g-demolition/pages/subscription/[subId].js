@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useRouter} from "next/router";
 
 import styles from "../../styles/Subscription.module.scss";
-import {ButtonGroup, Card, Elevation, Tree} from "@blueprintjs/core";
+import {Card, Elevation, Tree} from "@blueprintjs/core";
 import {generateTreeData, updateTree, updateTreeNode} from "../../helpers/tree-helper";
 import FeedList from "../../components/subscription/FeedList";
 import {getFeeds} from "../../helpers/feed-helper";

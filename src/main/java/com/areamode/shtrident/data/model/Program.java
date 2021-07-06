@@ -1,18 +1,27 @@
 package com.areamode.shtrident.data.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import org.springframework.data.elasticsearch.annotations.Document;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Document(indexName = "program")
+@Entity
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Program {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    private Integer programId;
+    private String programId;
 
     private String programGenre;
     private String gameGenre;

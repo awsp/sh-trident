@@ -1,13 +1,15 @@
 package com.areamode.shtrident.api.v1;
 
 import com.areamode.shtrident.data.model.Feed;
-import com.areamode.shtrident.data.model.FeedRequest;
+import com.areamode.shtrident.payload.request.FeedRequest;
 import com.areamode.shtrident.service.FeedSubscriptionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/feed")

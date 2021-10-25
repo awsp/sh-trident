@@ -14,8 +14,8 @@ import com.sun.syndication.io.SyndFeedInput;
 import com.sun.syndication.io.XmlReader;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
 
 import java.io.IOException;
 import java.net.URL;
@@ -107,6 +107,6 @@ public class FeedSubscriptionServiceImpl implements FeedSubscriptionService {
         if (feed.getEnclosure().isEmpty() || feed.getPubDate().isEmpty() || feed.getLink().isEmpty()) {
             throw new FeedHashException("Unable to generate hash");
         }
-        return DigestUtils.md5Hex(feed.getPubDate() + SEPARATOR + feed.getLink() + SEPARATOR + feed.getEnclosure());
+        return DigestUtils.md5DigestAsHex((feed.getPubDate() + SEPARATOR + feed.getLink() + SEPARATOR + feed.getEnclosure()).getBytes());
     }
 }

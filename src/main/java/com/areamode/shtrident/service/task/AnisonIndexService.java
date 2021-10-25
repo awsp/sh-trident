@@ -5,8 +5,8 @@ import com.areamode.shtrident.data.model.Anison;
 import com.areamode.shtrident.data.repo.AnisonRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -70,14 +70,14 @@ public class AnisonIndexService extends IndexingService<Anison> {
 
     @Override
     String getHash(Anison anison) {
-        return DigestUtils.md5Hex(anison.getProgramGenre() + SEPARATOR +
+        return DigestUtils.md5DigestAsHex((anison.getProgramGenre() + SEPARATOR +
                 anison.getAnisonId() + SEPARATOR +
                 anison.getProgramName() + SEPARATOR +
                 anison.getProgramGenre() + SEPARATOR +
                 anison.getDescription() + SEPARATOR +
                 anison.getDescriptionSort() + SEPARATOR +
                 anison.getTitle() + SEPARATOR +
-                anison.getSongBy());
+                anison.getSongBy()).getBytes());
     }
 
     @Override

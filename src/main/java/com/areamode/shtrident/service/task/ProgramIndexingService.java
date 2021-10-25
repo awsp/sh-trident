@@ -5,8 +5,8 @@ import com.areamode.shtrident.data.model.Program;
 import com.areamode.shtrident.data.repo.ProgramRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -72,7 +72,7 @@ public class ProgramIndexingService extends IndexingService<Program> {
 
     @Override
     String getHash(Program program) {
-        return DigestUtils.md5Hex(program.getProgramId() + SEPARATOR +
+        return DigestUtils.md5DigestAsHex((program.getProgramId() + SEPARATOR +
                 program.getProgramGenre() + SEPARATOR +
                 program.getGameGenre() + SEPARATOR +
                 program.getTitle() + SEPARATOR +
@@ -80,7 +80,7 @@ public class ProgramIndexingService extends IndexingService<Program> {
                 program.getSubTitle() + SEPARATOR +
                 program.getSubTitleKana() + SEPARATOR +
                 program.getAudienceTarget() + SEPARATOR +
-                program.getStartDate());
+                program.getStartDate()).getBytes());
     }
 
     @Override

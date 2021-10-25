@@ -40,6 +40,6 @@ storage/
 importing/
 
 db.sqlite
-data/
+bin_data/
 !data/.gitkeep
 .DS_Store

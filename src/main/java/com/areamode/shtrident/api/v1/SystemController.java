@@ -45,4 +45,10 @@ public class SystemController {
         boolean cancelled = schedulingService.doCancel(uuid);
         return ResponseEntity.ok(TaskCancelled.builder().cancelled(cancelled).build());
     }
+
+    @GetMapping("/status/{uuid}")
+    public ResponseEntity<?> statusExecutor(@PathVariable String uuid) {
+        boolean status = schedulingService.status(uuid);
+        return ResponseEntity.ok(status);
+    }
 }

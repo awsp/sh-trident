@@ -41,11 +41,27 @@ public class SchedulingService {
         log.info("Cron job completed");
     }
 
+    /**
+     * Index program.csv, can be running once a date or by system controller
+     * /api/v1/system/index-program
+     *
+     * @return uuid associated to this task
+     */
     public String doIndexProgram() {
         Future<?> task = executor.submit(programIndexingService);
         return execute(task);
     }
 
+    public String doIndexAnison() {
+        Future<?> task = executor.submit(anisonIndexService);
+        return execute(task);
+    }
+
+    /**
+     * Cancelling a task using UUID
+     * @param uuid UUID of a task to be cancelled.
+     * @return if cancel is success or not
+     */
     public boolean doCancel(final String uuid) {
         Future<?> task = executorMap.get(uuid);
         if (task != null) {
@@ -55,6 +71,11 @@ public class SchedulingService {
         return false;
     }
 
+    /**
+     * Get status of a task by UUID
+     * @param uuid UUID of a test to be reported.
+     * @return if task is done or not
+     */
     public boolean status(final String uuid) {
         Future<?> task = executorMap.get(uuid);
         if (task != null) {
@@ -63,11 +84,11 @@ public class SchedulingService {
         return true;
     }
 
-    public String doIndexAnison() {
-        Future<?> task = executor.submit(anisonIndexService);
-        return execute(task);
-    }
-
+    /**
+     * Execute a task and return a UUID for this task
+     * @param task Task to be executed
+     * @return UUID for a task
+     */
     private String execute(Future<?> task) {
         String uuid = UUID.randomUUID().toString();
         executorMap.put(uuid, task);

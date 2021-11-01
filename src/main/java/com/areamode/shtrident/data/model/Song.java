@@ -15,7 +15,7 @@ import javax.persistence.Id;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Anison {
+public class Song {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

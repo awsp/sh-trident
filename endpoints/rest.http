@@ -54,7 +54,7 @@ POST {{apiBase}}/system/execute-scheduler
 POST {{apiBase}}/system/index-program
 
 ### Manual kick off indexing service
-POST {{apiBase}}/system/index-anison
+POST {{apiBase}}/system/index-song
 
 ### Cancel
 GET {{apiBase}}/system/cancel/86bec58f-bfae-489e-adff-a2dfe3f18776

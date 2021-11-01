@@ -1,7 +1,7 @@
 package com.areamode.shtrident.service.task;
 
 import com.areamode.shtrident.config.AnisonConfig;
-import com.areamode.shtrident.data.model.Anison;
+import com.areamode.shtrident.data.model.Song;
 import com.areamode.shtrident.data.repo.AnisonRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +18,7 @@ import java.nio.file.Paths;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class AnisonIndexService extends IndexingService<Anison> {
+public class AnisonIndexService extends IndexingService<Song> {
     private final AnisonConfig config;
     private final AnisonRepository anisonRepository;
 
@@ -38,7 +38,7 @@ public class AnisonIndexService extends IndexingService<Anison> {
 
                 line = line.replaceAll("\"", "");
                 String[] values = line.split(COMMA_DELIMITER);
-                Anison anison = Anison.builder()
+                Song anison = Song.builder()
                         .programId((values[config.getProgramIdIndex()]))
                         .programGenre((values[config.getProgramGenreIndex()]))
                         .programName((values[config.getProgramNameIndex()]))
@@ -69,7 +69,7 @@ public class AnisonIndexService extends IndexingService<Anison> {
     }
 
     @Override
-    String getHash(Anison anison) {
+    String getHash(Song anison) {
         return DigestUtils.md5DigestAsHex((anison.getProgramGenre() + SEPARATOR +
                 anison.getAnisonId() + SEPARATOR +
                 anison.getProgramName() + SEPARATOR +
@@ -81,8 +81,8 @@ public class AnisonIndexService extends IndexingService<Anison> {
     }
 
     @Override
-    boolean exists(Anison anison) {
-        return anisonRepository.existsByChecksum(anison.getChecksum());
+    boolean exists(Song song) {
+        return anisonRepository.existsByChecksum(song.getChecksum());
     }
 
 }

@@ -28,6 +28,7 @@ public class SchedulingService {
     private final ProgramIndexingService programIndexingService;
     private final AnisonIndexService anisonIndexService;
 
+
     @Scheduled(cron = "${cron.expression}")
     public void doJob() {
         log.info("Starting cron job");
@@ -52,6 +53,12 @@ public class SchedulingService {
         return execute(task);
     }
 
+    /**
+     * Index anison.csv, can be set to run once a date or by system controller
+     * /api/v1/system/index-anison
+     *
+     * @return uuid associated to this task
+     */
     public String doIndexAnison() {
         Future<?> task = executor.submit(anisonIndexService);
         return execute(task);
@@ -59,6 +66,7 @@ public class SchedulingService {
 
     /**
      * Cancelling a task using UUID
+     *
      * @param uuid UUID of a task to be cancelled.
      * @return if cancel is success or not
      */
@@ -73,6 +81,7 @@ public class SchedulingService {
 
     /**
      * Get status of a task by UUID
+     *
      * @param uuid UUID of a test to be reported.
      * @return if task is done or not
      */
@@ -86,6 +95,7 @@ public class SchedulingService {
 
     /**
      * Execute a task and return a UUID for this task
+     *
      * @param task Task to be executed
      * @return UUID for a task
      */

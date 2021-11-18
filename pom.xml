@@ -55,7 +55,12 @@
 		<dependency>
 			<groupId>org.xerial</groupId>
 			<artifactId>sqlite-jdbc</artifactId>
-			<version>3.16.1</version>
+			<version>3.36.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>net.kaczmarzyk</groupId>
+			<artifactId>specification-arg-resolver</artifactId>
+			<version>2.6.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

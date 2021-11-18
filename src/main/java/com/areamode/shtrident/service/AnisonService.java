@@ -1,11 +1,11 @@
 package com.areamode.shtrident.service;
 
-import com.areamode.shtrident.data.projection.ProgramDetailProjection;
-import com.areamode.shtrident.data.projection.ProgramListProjection;
-
-import java.util.List;
+import com.areamode.shtrident.data.model.Program;
+import com.areamode.shtrident.payload.response.PagingResponse;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.http.HttpHeaders;
 
 public interface AnisonService {
-    List<ProgramListProjection> getProgramLabels(String startDate);
-    List<ProgramDetailProjection> allProgramsWithDetail();
+    PagingResponse getPrograms(Specification<Program> spec, HttpHeaders headers, Sort sort);
 }

@@ -1,12 +1,9 @@
 package com.areamode.shtrident.config;
 
-import com.areamode.shtrident.data.enumeration.ProgramGenre;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.EnumMap;
 
 @Configuration
 public class AnisonConfig {
@@ -44,11 +41,5 @@ public class AnisonConfig {
     @Setter
     @Value("${indexing.anison.reportPerLine}")
     private int reportPerLine = 100;
-
-    public static EnumMap<ProgramGenre, String> programGenres= new EnumMap<>(ProgramGenre.class);
-
-    static {
-        programGenres.put(ProgramGenre.TV, "テレビアニメーション");
-    }
 
 }

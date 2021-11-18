@@ -41,5 +41,8 @@ importing/
 
 db.sqlite
 bin_data/
+archive/
 !data/.gitkeep
 .DS_Store
+*.mv.db
+*.trace.db

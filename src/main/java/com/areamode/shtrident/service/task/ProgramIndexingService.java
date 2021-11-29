@@ -1,8 +1,8 @@
 package com.areamode.shtrident.service.task;
 
 import com.areamode.shtrident.config.ProgramConfig;
-import com.areamode.shtrident.data.model.Program;
-import com.areamode.shtrident.data.repo.ProgramRepository;
+import com.areamode.shtrident.domain.model.Program;
+import com.areamode.shtrident.domain.repo.ProgramRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

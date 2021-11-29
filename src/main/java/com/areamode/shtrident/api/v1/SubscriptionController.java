@@ -1,6 +1,6 @@
 package com.areamode.shtrident.api.v1;
 
-import com.areamode.shtrident.data.model.Subscription;
+import com.areamode.shtrident.domain.model.Subscription;
 import com.areamode.shtrident.service.FeedSubscriptionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;

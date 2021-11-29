@@ -1,6 +1,6 @@
 package com.areamode.shtrident.api.v1;
 
-import com.areamode.shtrident.data.model.Feed;
+import com.areamode.shtrident.domain.model.Feed;
 import com.areamode.shtrident.payload.request.FeedRequest;
 import com.areamode.shtrident.service.FeedSubscriptionService;
 import lombok.RequiredArgsConstructor;

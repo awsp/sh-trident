@@ -1,7 +1,7 @@
 package com.areamode.shtrident.service;
 
-import com.areamode.shtrident.data.model.Feed;
-import com.areamode.shtrident.data.model.Focus;
+import com.areamode.shtrident.domain.model.Feed;
+import com.areamode.shtrident.domain.model.Focus;
 
 import java.util.Optional;
 import java.util.Set;

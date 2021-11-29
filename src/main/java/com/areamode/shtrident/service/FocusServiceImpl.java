@@ -1,9 +1,9 @@
 package com.areamode.shtrident.service;
 
-import com.areamode.shtrident.data.model.Feed;
-import com.areamode.shtrident.data.model.Focus;
-import com.areamode.shtrident.data.repo.FeedRepository;
-import com.areamode.shtrident.data.repo.FocusRepository;
+import com.areamode.shtrident.domain.model.Feed;
+import com.areamode.shtrident.domain.model.Focus;
+import com.areamode.shtrident.domain.repo.FeedRepository;
+import com.areamode.shtrident.domain.repo.FocusRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
 package com.areamode.shtrident.payload.response;
 
-import com.areamode.shtrident.data.model.Program;
+import com.areamode.shtrident.domain.model.Program;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

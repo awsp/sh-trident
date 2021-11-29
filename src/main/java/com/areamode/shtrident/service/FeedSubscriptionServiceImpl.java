@@ -1,9 +1,9 @@
 package com.areamode.shtrident.service;
 
-import com.areamode.shtrident.data.model.Feed;
-import com.areamode.shtrident.data.model.Subscription;
-import com.areamode.shtrident.data.repo.FeedRepository;
-import com.areamode.shtrident.data.repo.SubscriptionRepository;
+import com.areamode.shtrident.domain.model.Feed;
+import com.areamode.shtrident.domain.model.Subscription;
+import com.areamode.shtrident.domain.repo.FeedRepository;
+import com.areamode.shtrident.domain.repo.SubscriptionRepository;
 import com.areamode.shtrident.exception.FeedHashException;
 import com.areamode.shtrident.payload.request.FeedRequest;
 import com.sun.syndication.feed.synd.SyndEnclosure;

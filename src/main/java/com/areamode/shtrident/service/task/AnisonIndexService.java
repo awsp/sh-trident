@@ -1,8 +1,8 @@
 package com.areamode.shtrident.service.task;
 
 import com.areamode.shtrident.config.AnisonConfig;
-import com.areamode.shtrident.data.model.Song;
-import com.areamode.shtrident.data.repo.AnisonRepository;
+import com.areamode.shtrident.domain.model.Song;
+import com.areamode.shtrident.domain.repo.AnisonRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

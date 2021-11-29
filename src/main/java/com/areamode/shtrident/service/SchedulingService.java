@@ -1,6 +1,6 @@
 package com.areamode.shtrident.service;
 
-import com.areamode.shtrident.data.model.Subscription;
+import com.areamode.shtrident.domain.model.Subscription;
 import com.areamode.shtrident.payload.request.FeedRequest;
 import com.areamode.shtrident.service.task.AnisonIndexService;
 import com.areamode.shtrident.service.task.ProgramIndexingService;

@@ -59,20 +59,19 @@ POST {{apiBase}}/system/index-song
 ### Cancel
 GET {{apiBase}}/system/cancel/86bec58f-bfae-489e-adff-a2dfe3f18776
 
-### Work
-POST {{apiBase}}/work
+### Create Profile
+POST {{apiBase}}/profile
 Content-Type: application/json
 
 {
-  "name": "ABC",
-  "workMetaList": [
-    {
-      "key": "aaa",
-      "value": "bbb"
-    },
-    {
-      "key": "ccc",
-      "value": "ddd"
-    }
-  ]
+  "aliasName": "bbb",
+  "program": {
+    "id": 5
+  }
 }
+
+### Create Eps
+PUT {{apiBase}}/profile/5/episodes/12
+
+### Show Eps
+GET {{apiBase}}/profile/1/episodes

@@ -1,7 +1,7 @@
 package com.areamode.shtrident.api.v1;
 
-import com.areamode.shtrident.data.model.Feed;
-import com.areamode.shtrident.data.model.Focus;
+import com.areamode.shtrident.domain.model.Feed;
+import com.areamode.shtrident.domain.model.Focus;
 import com.areamode.shtrident.service.FocusService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

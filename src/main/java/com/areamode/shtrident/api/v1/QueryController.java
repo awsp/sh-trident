@@ -1,7 +1,7 @@
 package com.areamode.shtrident.api.v1;
 
-import com.areamode.shtrident.data.enumeration.PagingHeaders;
-import com.areamode.shtrident.data.model.Program;
+import com.areamode.shtrident.domain.enumeration.PagingHeaders;
+import com.areamode.shtrident.domain.model.Program;
 import com.areamode.shtrident.payload.response.PagingResponse;
 import com.areamode.shtrident.service.AnisonService;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +27,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5000")
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/v1/query")
 @RequiredArgsConstructor
 public class QueryController {
